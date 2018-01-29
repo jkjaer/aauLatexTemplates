@@ -33,6 +33,8 @@ This report template is an attempt to give these LaTeX novices a gentle start. T
 This template can be used for writing such a thesis. The template takes care of loading the most common packages in the preamble, creating a front page, an English and a Danish abstract, a preface, the two parts, and a simple folder structure for organising the tex-files. 
 
 ## The AAU Poster Theme
+<img src="img/aauPosterLarge.png" width="400" alt="AAU Poster Theme">
+
  When researchers and students from Aalborg University (AAU) attend conferences around the world, they often use a poster for presenting their newest research results. To the best of my knowledge no AAU-branded poster theme is available to these researchers and students so they have to create their own or modify an existing theme.
 
 In order to avoid this, I have therefore created an AAU poster theme. The theme, which I have named aauposter, is simple, clean and unique. It is a particular configuration of the baposter class, and you have to download the baposter.cls file to use the AAU poster theme.
