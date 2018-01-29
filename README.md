@@ -14,11 +14,14 @@ The work diary can also be used as a collaborative tool for multiple forgetful p
 A lot of the people at AAU use the beamer class to make their presentations which they give at exams, lectures, conferences, and workshops. These people often use one of the many standard beamer themes for their presentations. There is nothing wrong with these themes, and they serve their purpose. However, they are not very unique and do not promote Aalborg University very well. In order to avoid this, I have created three Beamer themes:
 
 - The AAU Simple Beamer Theme
-<img src="img/aauSimpleLarge.png" width="400" alt="AAU Simple Theme">
+<img src="img/aauSimpleLarge.png" width="400" alt="AAU Simple Theme"><br />
+See [an example/the documentation](aauBeamer/aausimple/AAUsimpletheme.pdf).
 - The AAU Sidebar Beamer Theme
-<img src="img/aauSidebarLarge.png" width="400" alt="AAU Sidebar Theme">
+<img src="img/aauSidebarLarge.png" width="400" alt="AAU Sidebar Theme"><br />
+See [an example/the documentation](aauBeamer/aalborg/aausidebar/AAUsidebartheme.pdf).
 - The Aalborg Beamer Theme
-<img src="img/aalborgLarge.png" width="400" alt="Aalborg Theme">
+<img src="img/aalborgLarge.png" width="400" alt="Aalborg Theme"><br />
+See [an example/the documentation](aauBeamer/aalborg/aalborgtheme.pdf).
 
 If you like these, but are not affiliated with Aalborg University, you are very welcome to modify them. The easiest theme to modify is the Aalborg theme.
 
@@ -27,10 +30,14 @@ If you like these, but are not affiliated with Aalborg University, you are very 
 
 This report template is an attempt to give these LaTeX novices a gentle start. The template takes care of loading the most common packages in the preamble, creating a front page, an English and a Danish AAU title page, a preface with signatures, and a simple folder structure for organising the tex-files.
 
+See [an example/the documentation](aauReportTemplate/master.pdf).
+
 ## The AAU Ph.D. Thesis Template
  Most Ph.D.-students at Aalborg University write their thesis as a collection of papers. That is, the thesis consists of two parts. The first part contains an introduction to the problem, the state-of-the-art and the contributions made by the Ph.D.-student and his/her co-authors. The second part contains the relevant paper published during the Ph.D.
 
 This template can be used for writing such a thesis. The template takes care of loading the most common packages in the preamble, creating a front page, an English and a Danish abstract, a preface, the two parts, and a simple folder structure for organising the tex-files. 
+
+See [an example/the documentation](aauPhdCollectionThesis/master.pdf).
 
 ## The AAU Poster Theme
 <img src="img/aauPosterLarge.png" width="400" alt="AAU Poster Theme">

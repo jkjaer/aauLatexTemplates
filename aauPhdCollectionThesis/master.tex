@@ -1,0 +1,63 @@
+%  A simple AAU PhD thesis template (collection of papers).
+%  2016-08-01 v. 1.3.1
+%  Copyright 2012-2016 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+%
+%  This is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%
+%  This is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+%
+\input{setup/preamble.tex}% package inclusion and set up of the document
+\input{setup/hyphenations.tex}% 
+\input{setup/macros.tex}% my new macros
+
+\begin{document}
+%frontmatter
+\frontmatter
+\pagestyle{empty} %disable headers and footers
+\pagenumbering{roman} %use roman page numbering in the frontmatter
+\input{frontmatter/frontpage}
+\input{frontmatter/colophon}
+\input{frontmatter/cv}
+\input{frontmatter/abstract}
+\cleardoublepage
+\pdfbookmark[0]{Contents}{label:contents}
+\pagestyle{fancy} %enable headers and footers again
+\tableofcontents
+\listoftodos
+\input{frontmatter/preface}
+\cleardoublepage
+
+%mainmatter
+\mainmatter
+\part{Introduction}
+\include{introduction/introduction}
+
+%backmatter
+\appendix
+\part{Papers}
+\titleformat{%command
+  \chapter
+}[%shape
+display%
+]{%format
+  \normalfont\huge
+}{%label
+  \begin{center}\color{aaublue}\chaptertitlename\ \thechapter\end{center}
+}{%style
+  1cm
+}{%code before title
+  \thispagestyle{empty}\begin{center}\Large
+}[%code after title
+  \end{center}
+]
+\includepaper{papers/paperA/paperA}
+\includepaper{papers/paperB/paperB}
+\end{document}

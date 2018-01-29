@@ -1,0 +1,82 @@
+\section{Introduction}\label{sec:introduction}
+I do not want to write a lengthy introduction on how to use this template. If you are familiar with \LaTeXe, it should be fairly simple to use. Note, however, that you should pay attention to one detail regarding the compilation of the various bibliographies in the template.
+
+\subsection{Including the Bibliographies}
+I have received numerous emails asking me why their bibliographies for the introduction and the individual papers are not included in the thesis when they compile it. The reason is always that they blindly trust that their \LaTeXe\ editor of choice can generate the bibliographies for them automatically. However, this is not true for this thesis template since the introduction and the included papers have their own separate bibliography.
+
+Normally, an editor will run {\tt bibtex master} in the background when asked to compile the bibliography for a master document named {\tt master.tex}. Since the template uses the package {\tt chapterbib} for generating the multiple bibliographies, the editor should instead run {\tt bibtex introduction/introduction} to generate the bibliography for the introduction, {\tt bibtex papers/paperA/paperA} to generate the bibliography for paper A, and so on. You can see how I compile the template by looking in the included {\tt Makefile}. Note that you can run this {\tt Makefile} on both OS X and on a Linux distribution. On Windows, however, you will have to either translate the {\tt Makefile} into a bat-file, install Cygwin, or make your \LaTeXe\ editor run the same commands.
+
+\subsection{Formatting Guidelines}
+This template should comply with the formatting guidelines for an Aalborg University Ph.D. thesis. However, it is \textit{your} responsibility to ensure that this is also the case. You can see the guidelies below. Please note that these guidelines have not been formulated by the Aalborg University Press so any questions should be directed to them. See the email address below.
+
+\subsubsection{Minimum requirements regarding thesis format before submission}
+\begin{itemize}
+    \item Page format: 170 mm x 240 mm.
+    \item Margins /top, bottom, right, left): 25 mm.
+    \item Page number and header: Placed centrally top and bottom.
+    \item All pages in the pdf must be placed vertically (portrait), otherwise they cannot be printed.
+    \item Tables, pictures etc. must be rotated clockwise/counter clockwise for portrait format. Take care that the page number are in the right place afterwards!
+    \item Font type: If fonts are not embedded use only Windows/MAC standard fonts (e.g. Arial, Verdana, Times New Roman, Minion Pro, Baskerville, Garamond etc.).
+    \item Colophon: Fill in as much as you can. The University press will fill in Serial title, ISBN, ISSN and reviewing committee.
+    \item You are welcome to include an author CV, preferably with picture (see template). Maximum 1350 key-strokes (no spacing).
+    \item You can also include a back cover text when you submit the thesis in Pure/VBN if you want. Maximum 1200 keystrokes (no spacing).
+\end{itemize}
+REMEMBER to open your pdf and do a thorough check of the thesis page by page before you submit it in VBN. Once you have submitted your thesis in VBN, you must send an email to Aalborg University Press (\href{mailto:aauf@forlag.aau.dk}{aauf@forlag.aau.dk}) with the following information:
+\begin{itemize}
+    \item Your choice of cover.
+    \item If you want your own pictures on the cover, please attach 1–2 pictures size 17.5 cm x 8.5 cm in 300 dpi/ppi.
+    \item Information regarding the number of copies of the thesis. Remember to clear the number with your department and PhD School.
+\end{itemize}
+
+\subsubsection{Formatting tips}
+\begin{itemize}
+    \item Body text: Times New Roman 10pt / 12pt spacing.
+    \item Headline level 1: Arial bold 18pt / 21 pt - Capital letters.
+    \item Headline level 2: Arial bold 11pt / 21 pt - Capital letters.
+    \item Headline level 3: Arial bold 10pt / 21 pt - Capital letters.
+    \item Quotations: Times New Roman Italic 10pt / 12pt.
+\end{itemize}
+Please notice that chapter must start on a right-hand page.
+
+\subsubsection{Hyphenation}
+Please do a thorough check of the thesis page by page to ensure a proper hyphenation. For additional info see \href{https://en.wikibooks.org/wiki/LaTeX/Text_Formatting#Hyphenation}{wikibooks}.
+
+\subsubsection{CMYK color model}
+All text and figures should be in the CMYK color model.
+
+\paragraph{Images/photos} Images in RGB should be converted to CMYK using for instance \href{http://www.rgb2cmyk.org/}{rgb2cmyk.org} or \href{https://gist.github.com/patrickfav/21aa5bc96cd6fb9dbed1}{convert\_cmyk.bat}. For more info see \href{http://tex.stackexchange.com/questions/48101/how-do-i-make-sure-images-are-cmyk}{stackexchange: how-do-i-make-sure-images-are-cmyk}. Note that PNG or Portable Network Graphic format is a graphic file format that uses lossless compression algorithm to store raster images. It is frequently used as web site images rather than printing as it supports only the RGB color model. So CMYK color images cannot be saved as PNG image.
+
+\paragraph{Text in color} It is recomended not to use colors for text. However, if you want to use colors they must use the CMYK model.
+If you use fontspec, for font definitions, using the [Color=...] options as fontspec doesn’t support CMYK colours. instead you will need to use the \\color command from xcolor instead. For more information see for instance
+\href{http://tex.stackexchange.com/questions/9961/pdf-colour-model-and-latex}{stackexchange: pdf-colour-model-and-latex}.
+
+\paragraph{Black colors} Please ensure that black colors are truly black and not a dark gray tone, i.e. black text including headers and
+footers should be 100 \% K(eycolor). This goes for both text and figures.
+
+\subsubsection{Include fonts in the PDF} Please make sure that all fonts are embedded in the PDF. To check this using the normal Adobe Reader (or
+Foxit if you prefer) select File - Properties, on the resulting Dialog choose the Font tab. You will see a list of fonts. The ones that are embedded will state this fact in ( ) behind the font name. For more information see \href{http://stackoverflow.com/questions/614619/how-to-find-out-which-fonts-are-referenced-and-which-are-embedded-in-a-pdf-docum}{stackoverflow: how-to-find-out-which-fonts-are-referenced-and-which-are-embedded-in-a-pdf.}
+
+If the fonts are not embeded: Using pdflatex to create a PDF from LaTeX make sure pdftexDownloadBase14 is
+set to true in the updmap config file. For more information see chapter “3. LaTeX => PDF” in \href{http://www.boekenenproefschriften.nl/proefschriften/sites/default/files/EmbedLaTeXfonts.pdf}{EmbedLaTeX-fonts.pdf.}
+
+Additional information on the subject:
+\begin{itemize}
+    \item \href{http://tex.stackexchange.com/questions/10391/how-to-embed-fonts-at-compile-time-with-pdflatex}{how-to-embed-fonts-at-compile-time-with-pdflatex}
+    \item \href{http://lemire.me/blog/2005/08/29/getting-pdflatex-to-embed-all-fonts/}{getting-pdflatex-to-embed-all-fonts}.
+    \item \href{http://lemire.me/blog/2006/08/18/embedding-fonts-for-ieee/}{embedding-fonts-for-ieee}.
+\end{itemize}
+
+\subsubsection{How to embed missing fonts in pdf?}
+If you need to include a pdf in your thesis where the fonts are missing please have a look at some of the resources
+below.
+\begin{itemize}
+    \item \href{https://blogs.adobe.com/acrobatforlifesciences/2008/09/reembedding_fonts_in_a_pdf/}{Adobe: Reembedding fonts in a pdf}
+    \item \href{http://www.prepressure.com/pdf/basics/fonts}{prepressure.com: Fonts in PDF files}
+    \item \href{http://stackoverflow.com/questions/4231656/how-do-i-embed-fonts-in-an-existing-pdf}{Stackoverflow: how-do-i-embed-fonts-in-an-existing-pdf}
+\end{itemize}
+
+\subsubsection{Graphics}
+\begin{itemize}
+    \item Make sure that no lines have a thickness less than 0.15 points.
+    \item Images should be approximately 300 dpi/ppi but no more than 400 dpi/ppi.
+\end{itemize}

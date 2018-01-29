@@ -1,0 +1,87 @@
+% This is the inner theme file of the AAU Simple theme.
+% Copyright (c) 2014 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeAAUsimple}[2014/10/31 v1.3.2 The AAU Simple Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme options and definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%beamer specific options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+{
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %templates
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %title page
+  \setbeamertemplate{title page}{%
+    \begin{minipage}[c][\textheight][c]{\textwidth}
+      \vfill
+      \centering
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\vspace*{\baselineskip}
+      
+      \begin{beamercolorbox}[wd=\textwidth,center,sep=\baselineskip]{frametitle}%
+        {\usebeamerfont{date}\insertdate}\vspace*{\baselineskip}
+        
+        {\usebeamerfont{author}\insertauthor}\vspace*{\baselineskip}
+        
+        {\usebeamerfont{institute}\insertinstitute}
+      \end{beamercolorbox}\vspace*{\baselineskip}
+      
+      {\inserttitlegraphic}\vspace*{\baselineskip}
+    \end{minipage}
+  }
+  
+  
+  %final page
+  \defbeamertemplate{final page}{text}[1]{%
+    \begin{minipage}[c][\textheight][c]{\textwidth}
+      \centering
+      \vfill
+      \begin{beamercolorbox}[wd=\textwidth,center,sep=2\baselineskip]{frametitle}
+          #1
+      \end{beamercolorbox}
+      \vfill
+      {\inserttitlegraphic}\vspace*{\baselineskip}
+    \end{minipage}
+  }
+  \newcommand{\finalpage}[1]{%
+    \setbeamertemplate{final page}[text]{#1}
+    \usebeamertemplate{final page}
+  }
+  
+  % add the aau waves to the background
+  \newcommand{\aauwavesbg}{%
+    \setbeamertemplate{background canvas}{
+      \includegraphics[width=\paperwidth,height=\paperheight]{AAUgraphics/aau_waves}
+      \tikzexternaldisable
+      \tikz[overlay] \fill[fill opacity=0.75,fill=white] (0,0) rectangle (-\paperwidth
+      ,\paperheight);
+      \tikzexternalenable
+    }
+  }
+  
+  % use numbers instead of a picture for the references
+  \setbeamertemplate{bibliography item}[text]
+
+}%end of beamer specific options
+
+\mode<all>

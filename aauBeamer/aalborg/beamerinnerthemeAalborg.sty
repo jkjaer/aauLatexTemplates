@@ -1,0 +1,122 @@
+% This is the inner theme file of the Aalborg theme.
+% Copyright (c) 2011-2014 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeAalborg}[2014/09/13 v1.4.0 The Aalborg Beamer Theme]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme options and definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+%%%theme options
+\DeclareOptionBeamer{left}{\def\beamer@sidebarside{left}}
+\DeclareOptionBeamer{right}{\def\beamer@sidebarside{right}}
+\ExecuteOptionsBeamer{right}
+\ProcessOptionsBeamer
+
+\def\beamer@lefttext{left} %used for comparison below
+\newlength{\beamer@plainpagewidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%beamer specific options
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>%refers to the first four modes (beamer,handout,second and trans). That is, to all modes except the article mode
+{
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %templates
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %title page
+  \setbeamertemplate{title page}{%
+    \ifx\beamer@sidebarside\beamer@lefttext% sidebar on the left
+      \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@leftsidebar}%
+      \hskip-\beamer@leftsidebar%
+    \else% sidebar on the right
+      \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@rightsidebar}%
+    \fi%
+    \begin{minipage}[c][\textheight][c]{\beamer@plainpagewidth}
+      \vfill
+      \centering
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\vspace*{\baselineskip}
+      
+      \begin{beamercolorbox}[wd=\beamer@plainpagewidth,center,sep=\baselineskip]{titlepagecolorbox}%
+        {\usebeamerfont{date}\insertdate}\vspace*{\baselineskip}
+        
+        {\usebeamerfont{author}\insertauthor}\vspace*{\baselineskip}
+        
+        {\usebeamerfont{institute}\insertinstitute}
+      \end{beamercolorbox}\vspace*{\baselineskip}
+      
+      {\inserttitlegraphic}\vspace*{\baselineskip}
+    \end{minipage}
+  }
+  
+  %final page
+  \defbeamertemplate*{final page}{text}[1]{%
+    \ifx\beamer@sidebarside\beamer@lefttext% sidebar on the left
+      \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@leftsidebar}%
+      \hskip-\beamer@leftsidebar%
+    \else% sidebar on the right
+      \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@rightsidebar}%
+    \fi%
+    \begin{minipage}[c][\textheight][c]{\beamer@plainpagewidth}
+      \vfill
+      \centering
+      \begin{beamercolorbox}[wd=\beamer@plainpagewidth,center,sep=2\baselineskip]{titlepagecolorbox}%
+          #1 
+      \end{beamercolorbox}
+      \vfill
+      {\inserttitlegraphic}\vspace*{\baselineskip}
+    \end{minipage}
+  }
+  \newcommand{\finalpage}[1]{
+    \setbeamertemplate{final page}[text]{#1}
+    \usebeamertemplate{final page}
+  }
+  
+  % add the aau waves to the background
+  \newcommand{\aauwavesbg}{%
+    \setbeamertemplate{background canvas}{
+      \includegraphics[width=\paperwidth,height=\paperheight]{AAUgraphics/aau_waves}
+      \tikzexternaldisable
+      \tikz[overlay] \fill[fill opacity=0.75,fill=white] (0,0) rectangle (-\paperwidth,\paperheight);
+      \tikzexternalenable
+    }
+  }
+  
+  % use numbers instead of a picture for the references
+  \setbeamertemplate{bibliography item}[text]
+
+  %part page
+  \AtBeginPart{\frame[plain]{\partpage}} %adds a plain part page as defined below
+  \defbeamertemplate*{part page}{Aalborg theme}{%
+    \ifx\beamer@sidebarside\beamer@lefttext% sidebar on the left
+      \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@leftsidebar}%
+      \hskip-\beamer@leftsidebar%
+    \else% sidebar on the right
+      \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@rightsidebar}%
+    \fi%
+    \begin{minipage}[c][\textheight][c]{\beamer@plainpagewidth}
+      \centering
+      {\usebeamerfont{title}\usebeamercolor[fg]{author}{Part \Roman{part}}}\vspace*{\baselineskip}
+
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}{\insertpart}}
+    \end{minipage}
+  }
+
+}%end of beamer specific options
+
+\mode<all>

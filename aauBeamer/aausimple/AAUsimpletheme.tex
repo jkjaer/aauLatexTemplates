@@ -1,0 +1,351 @@
+\documentclass[10pt]{beamer}
+\usetheme[
+%%% options passed to the outer theme
+%    progressstyle=movCircCnt,   %either fixedCircCnt, movCircCnt, or corner
+%    rotationcw,          % change the rotation direction from counter-clockwise to clockwise
+%    shownavsym          % show the navigation symbols
+  ]{AAUsimple}
+  
+% If you want to change the colors of the various elements in the theme, edit and uncomment the following lines
+% Change the bar and sidebar colors:
+%\setbeamercolor{AAUsimple}{fg=red!20,bg=red}
+%\setbeamercolor{sidebar}{bg=red!20}
+% Change the color of the structural elements:
+%\setbeamercolor{structure}{fg=red}
+% Change the frame title text color:
+%\setbeamercolor{frametitle}{fg=blue}
+% Change the normal text color background:
+%\setbeamercolor{normal text}{fg=black,bg=gray!10}
+% ... and you can of course change a lot more - see the beamer user manual.
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+\usepackage{helvet}
+
+% colored hyperlinks
+\newcommand{\chref}[2]{%
+  \href{#1}{{\usebeamercolor[bg]{AAUsimple}#2}}%
+}
+
+\title{The AAU Simple Beamer Theme}
+
+\subtitle{v.\ 1.3.2}  % could also be a conference name
+
+\date{\today}
+
+\author{
+  Jesper Kjær Nielsen\\
+  \href{mailto:jkn@es.aau.dk}{{\tt jkn@es.aau.dk}}
+}
+
+% - Give the names in the same order as they appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation. See the beamer manual for an example
+
+\institute[
+%  {\includegraphics[scale=0.2]{aau_segl}}\\ %insert a company, department or university logo
+  Dept.\ of Electronic Systems\\
+  Aalborg University\\
+  Denmark
+] % optional - is placed in the bottom of the sidebar on every slide
+{% is placed on the bottom of the title page
+  Department of Electronic Systems\\
+  Aalborg University\\
+  Denmark
+  
+  %there must be an empty line above this line - otherwise some unwanted space is added between the university and the country (I do not know why;( )
+}
+
+% specify a logo on the titlepage (you can specify additional logos an include them in 
+% institute command below
+\pgfdeclareimage[height=1.5cm]{titlepagelogo}{AAUgraphics/aau_logo_new} % placed on the title page
+%\pgfdeclareimage[height=1.5cm]{titlepagelogo2}{AAUgraphics/aau_logo_new} % placed on the title page
+\titlegraphic{% is placed on the bottom of the title page
+  \pgfuseimage{titlepagelogo}
+%  \hspace{1cm}\pgfuseimage{titlepagelogo2}
+}
+
+\begin{document}
+% the titlepage
+{\aauwavesbg%
+\begin{frame}[plain,noframenumbering] % the plain option removes the header from the title page
+  \titlepage
+\end{frame}}
+%%%%%%%%%%%%%%%%
+
+% TOC
+\begin{frame}{Agenda}{}
+\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+% motivation for creating this theme
+\begin{frame}{Introduction}{}
+\begin{block}{Why the AAU Simple beamer theme?}
+  \begin{itemize}
+    \item<1-> During the last couple of years, I have shared the beamer themes named \chref{http://kom.aau.dk/~jkn/latex/latex.php\#beamer_aausidebar}{AAU Sidebar} and \chref{http://kom.aau.dk/~jkn/latex/latex.php\#beamer_aalborg}{Aalborg} on my website \chref{http://kom.aau.dk/~jkn}{http://kom.aau.dk/\textasciitilde jkn}.
+    \item<2-> Both of these themes feature a sidebar in which the table of content and progress are shown.
+    \item<3-> Some people (in particular one - Yes, I am looking at you, Mads) have been asking about an AAU beamer theme without a sidebar. The present theme named \alert{AAU Simple} is precisely that. 
+    \item<4-> Like the \chref{http://kom.aau.dk/~jkn/latex/latex.php\#beamer_aausidebar}{AAU Sidebar} theme, the theme is not really useful to people not affiliated with AAU due to the tight integration between the theme and the round AAU logo. However, everyone is of course encouraged to download and modify the theme according to their own needs. 
+  \end{itemize}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{License}
+% the license
+\begin{frame}{Introduction}{License}
+  \begin{itemize}
+    \item<1-> The AAU logo is covered by copyright rules. I have used the logo from \chref{http://aau.designguiden.dk}{http://aau.designguiden.dk}. As long as you use the theme for making presentations in connection with your work at AAU, you are allowed to use the AAU logo.
+    \item<2-> The rest of the theme is provided under the GNU General Public License v. 3 (GPLv3). This basically means that you can redistribute it and/or modify it under the same license. For more information on the GPL license see \chref{http://www.gnu.org/licenses/}{http://www.gnu.org/licenses/}
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{Installation}
+% general installation instructions
+\begin{frame}{Installation}
+  The theme consists of four files
+  \begin{enumerate}
+    \item {\tt beamerthemeAAUsimple.sty}
+    \item {\tt beamerinnerthemeAAUsimple.sty}
+    \item {\tt beamerouterthemeAAUsimple.sty}
+    \item {\tt beamercolorthemeAAUsimple.sty}
+  \end{enumerate}
+  The theme can either be installed for local or global use.
+  \pause
+  \begin{block}{Local Installation}
+    The simplest way of installing the theme is by placing the four theme files in the same folder as your presentation. When you download the theme, the four theme files are located in the {\tt local} folder.
+  \end{block}
+\end{frame}
+
+% general installation instructions
+\begin{frame}{Installation}
+  \begin{block}{Global Installation}
+  \begin{itemize}
+     \item If you wish to make the theme globally available, you must put the files in your local latex directory tree. The location of the root of the local directory tree depends on the operating system and the latex distribution. On the following slides, you can read the instructions for some common setups.
+    \item When you download the theme, the four theme files are embedded in a directory structure (in the {\tt global} folder) ready to be copied directly to the root of your local directory tree.
+    \item On the following slides, we refer to this directory structure as {\tt <dirstruct>}. \alert{Note} that some parts of the directory may already exist if you have installed other packages in your local latex directory tree. If this is the case, you simply merge {\tt <dirstruct>} with your existing setup.
+  \end{itemize}
+  \end{block}
+\end{frame}
+
+\subsection{GNU/Linux}
+% installation on GNU/Linux
+\begin{frame}{Installation}{GNU/Linux}
+  \begin{block}{Ubuntu with TeX Live}
+    \begin{enumerate}
+      \item Place the {\tt <dirstruct>} in the root of your local latex directory tree. By default it is\\
+        {\tt \textasciitilde /texmf}\\
+        If the root does not exist, create it. The symbol {\tt \textasciitilde} refers to your home folder, i.e., {\tt /home/<username>}
+      \item In a terminal run\\
+        {\tt \$ texhash \textasciitilde /texmf}
+    \end{enumerate}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Microsoft Windows}
+% installation on Microsoft Windows
+\begin{frame}{Installation}{Microsoft Windows}
+  \begin{block}{Windows with MiKTeX}
+    Apparently, MiKTeX does not include a local latex directory tree by default. Therefore, you first have to create it.
+    \begin{enumerate}
+      \item To do this, create a folder {\tt <somewhere>} named, e.g., {\tt texmf}
+      \item Add this folder in the Roots tab of the MiKTeX Settings dialog
+      \item Place the {\tt <dirstruct>} in your newly created local latex directory tree\\
+    {\tt <somewhere>\textbackslash texmf}\\
+      \item Open the MiKTeX Settings dialog and click Refresh FNDB.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+% installation on Microsoft Windows Cont'd
+\begin{frame}{Installation}{Microsoft Windows}
+  \begin{block}{Windows with TeX Live}
+    In the advanced TeX Live Installer, you can manually change the default position of the root of the local latex directory tree. However, we assume the default position below.
+    \begin{enumerate}
+      \item Place the {\tt <dirstruct>} in your local latex directory tree\\
+        {\tt \%USERPROFILE\%\textbackslash texmf}\\
+        If it does not exist, create it. In XP {\tt \%USERPROFILE\%} is\\
+      {\tt c:\textbackslash Document and Settings\textbackslash<username>}\\
+      by default, and in Vista and above it is by default\\
+      {\tt c:\textbackslash Users\textbackslash<username>}
+      \item Open the TeX Live Manager dialog and select 'Update filename database' under 'Actions'.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Mac OS X}
+% installation on Mac OS X
+\begin{frame}{Installation}{Mac OS X}
+  \begin{block}{Mac OS X with MacTeX}
+     Place the {\tt <dirstruct>} in the root of your local latex directory tree. By default it is\\
+        {\tt \textasciitilde /Library/texmf}\\
+        If the root does not exist, create it. The symbol {\tt \textasciitilde} refers to your home folder, i.e., {\tt /home/<username>}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Required Packages}
+% list of required packages
+\begin{frame}{Installation}{Required Packages}
+  Of course, you have to have the Beamer class installed. In addition, the theme loads two packages
+  \begin{itemize}
+    \item TikZ\footnote{By the way, TikZ is an awesome package for creating beautiful graphics. If you do not believe me, then have a look at these \chref{http://www.texample.net/tikz/examples/}{online examples} or the \chref{http://tug.ctan.org/tex-archive/graphics/pgf/base/doc/generic/pgf/pgfmanual.pdf}{pgf user manual}. If you want to create beautiful plots, you should use the pgfplots package which is based on TikZ.}
+    \item calc
+  \end{itemize}
+  These packages are very common and should therefore be included in your latex distribution.
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{User Interface}
+\subsection{Loading the Theme and Theme Options}
+% list of the themes and options
+\begin{frame}{User Interface}{Loading the Theme and Theme Options}
+  \begin{block}{The Presentation Theme}
+    It is very simple to load the presentation theme. Just type\\
+    {\tt \textbackslash usetheme[<options>]\{AAUsimple\}}\\
+    which is exactly the same way other beamer presentation themes are loaded. The presentation theme loads the inner, outer and color AAU Simple theme files and passes the {\tt <options>} on to these files.
+  \end{block}
+  \begin{block}{The Inner Theme}
+    You can load the inner theme directly by\\
+    {\tt \textbackslash useinnertheme\{AAUsimple\}}\\
+    and it has no options.
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+% list of the themes and options
+\begin{frame}{User Interface}{Loading the Theme and Theme Options}
+  \begin{block}{The Outer Theme}
+    You can load the outer theme directly by\\
+    {\tt \textbackslash useoutertheme[<options>]\{AAUsimple\}}\\
+    Currently, the theme options are
+  \begin{itemize}
+    \item {\tt progressstyle=\{fixedCircCnt, movCircCnt, or corner\}}: set how the progress is illustrated. The value {\tt fixedCircCnt} is the default. 
+    \item {\tt rotationcw}: set the direction of the rotation of the progress circle to clockwise instead of counterclockwise. This option has only effect for the circular progress bars.
+    \item {\tt shownavsym}: show the navigation symbols
+  \end{itemize}
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+% list of the themes and options
+\begin{frame}{User Interface}{Loading the Theme and Theme Options}
+  \begin{block}{The Color Theme}
+    You can load the color theme directly by
+    {\tt \textbackslash usecolortheme\{AAUsimple\}}
+  \end{block}
+  \pause
+  \begin{block}{The Color Element {\tt AAUsimple}}
+    The color theme defines a new beamer color element named {\tt AAUsimple} whose foreground and background colors are
+    \begin{itemize}
+      \item fg: {\usebeamercolor[fg]{AAUsimple}light blue (\{RGB\}\{194,193,204\})}
+      \item bg: {\usebeamercolor[bg]{AAUsimple}dark blue (\{RGB\}\{33,26,82\})}
+    \end{itemize}
+    You can use these colors in the standard beamer way by using the command
+    {\tt \textbackslash usebeamercolor[<fg or bg>]\{AAUsimple\}}. See the beamer manual for instructions.\pause Note that this version of the theme is an official AAU version, in accordance with the \chref{http://aau.designguiden.dk/}{AAU design guide}. However, you can easily change it (including the colour of the logo) by following the steps in {\tt beamercolorthemeAAUsimple.sty}.
+  \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Modifying the theme}
+% how to modify the theme
+{\setbeamercolor{AAUsimple}{fg=gray!50,bg=orange!50}
+ \setbeamercolor{structure}{fg=red}
+ \setbeamercolor{frametitle}{use=structure,fg=structure.fg}
+ \setbeamercolor{normal text}{bg=gray!20}
+\begin{frame}{User Interface}{Modifying the Theme}
+  \begin{itemize}
+    \item<1-> The default configuration of fonts, colors, and layout complies with the \chref{http://aau.designguiden.dk}{AAU design guidelines} and is the \alert{official} version of the theme.
+    \item<2-> However, you can modify specific elements of the theme through the templates provided by the beamer class. Please refer to the beamer user manual for instructions.
+    \item<3-> For example, on this slide the following commands have been used
+      \begin{itemize}
+        \item Change the header colours:\\
+        {\tt \textbackslash setbeamercolor\{AAUsimple\}\{fg=blue!20,bg=red!50\}}
+        \item Change the color of the structural elements:\\
+        {\tt \textbackslash setbeamercolor\{structure\}\{fg=black\}}\\
+        \item Change the frame title text color:
+        {\tt \textbackslash setbeamercolor\{frametitle\}\{use=structure, fg=structure.fg\}}
+        \item Change the background color of the text
+        {\tt \textbackslash setbeamercolor\{normal text\}\{bg=gray!20\}}
+      \end{itemize}
+  \end{itemize}
+\end{frame}}
+%%%%%%%%%%%%%%%%
+
+\subsection{AAU Waves}
+% the AAU Waves background
+\begin{frame}{User Interface}{The AAU Waves Background Image}
+\begin{block}{The AAU Waves Background Image}
+\begin{itemize}
+  \item<1-> In this documentation, the title page frame and the last frame have the AAU waves as the background image. The AAU waves background image can be added to any single frame by wrapping a frame in the following way\\
+  {\tt \{\textbackslash aauwavesbg\\
+    \textbackslash begin\{frame\}[<options>]\{Frame Title\}\{Frame Subtitle\}\\
+    \ldots\\
+    \textbackslash end\{frame\}\}}
+  \item<2-> Ideally, I would like to create a new frame option called {\tt aauwavesbg} which can enable the AAU waves background. However, I have not been able to figure out how such an option can be added. If you know how this can be done, please contact me.
+\end{itemize}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Widescreen Support}
+% Widescreen Support
+\begin{frame}{User Interface}{Widescreen Support}
+\begin{block}{Widescreen Support}
+  Newer projectors and almost any modern TV support a widescreen format such as 16:10 or 16:9. Beamer (>= v. 3.10) supports various aspect ratios of the slides. According to section 8.3 on page 77 of the Beamer user guide v. 3.10, you can write\\
+{\tt\textbackslash documentclass[aspectratio=1610]\{beamer\}}\\
+to get slides with an aspect ratio of 16:10. You can also use 169, 149, 54, 43 (default), and 32 to get other aspect ratios.
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+
+\section{Feedback}
+%\subsection{Known Problems}
+%% known problems
+%\begin{frame}{Feedback}{Known Problems}
+%  \begin{description}
+%    \item[More than 50 slides] Internally, TeX cannot work with numbers exceeding +/-16
+%  \end{description}
+%\end{frame}
+%%%%%%%%%%%%%%%%%
+
+\subsection{Bugs, Comments and Suggestions}
+% help me iron out the bugs or give me some comment and suggestions
+\begin{frame}{Feedback}{Bugs, Comments and Suggestions}
+  \begin{itemize}
+    \item<1-> There are probably still some bugs in the theme. If you should find one, then please let me know. No bug is too small!
+    \item<2-> Also, please contact me, if you have some exciting new ideas or just some simple usability improvements.
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\subsection{Contact Information}
+% contact information
+\begin{frame}{Feedback}{Contact Information}
+In case you have any comments, suggestions or have found a bug, please do not hesitate to contact me. You can find my contact details below.
+  \begin{center}
+    \insertauthor\\
+    \chref{http://kom.aau.dk/~jkn}{http://kom.aau.dk/\textasciitilde jkn}\\
+    Niels Jernes Vej 12, A6-309\\
+    9220 Aalborg Ø
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+{\aauwavesbg
+\begin{frame}[plain,noframenumbering]
+  \finalpage{Thank you for using this theme!}
+\end{frame}}
+%%%%%%%%%%%%%%%%
+
+\end{document}
