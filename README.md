@@ -1,5 +1,5 @@
 # aauLatexTemplates
-On this page, I have collected various Latex-related templates which may be useful to you. The site contains a work/project diary template, three beamer templates, a report template, a Ph.D.-thesis template, and a poster template which are described in detail below. These are primarily intended for use by other people studying or working at Aalborg University (AAU), but everyone is encouraged to use the templates.
+On this page, I have collected various Latex-related templates which may be useful to you. The site contains a work/project diary template, three beamer templates, a report template, a Ph.D.-thesis template, and a poster template which are all described in more detail below. These are primarily intended for use by other people studying or working at Aalborg University (AAU), but everyone is encouraged to use the templates.
 
 ## The Work and Project Diary
  How often have you returned to an old task wondering what you were thinking the last time you worked on it? Did I really write this piece of code? How did I connect the DUT to the measurement equipment? What did I search for in Google when I found that interesting paper? What did I name that file? Where did I place that piece of paper with the magnificent derivation? Unfortunately, I am guilty of asking myself these and many other questions way too often. Yes, I tend to forget things. Even important things. Things which I am sure that the future me will remember, but he often disappoints me.
@@ -11,10 +11,14 @@ Sure sure, that all sounds great and all, but how do you manage the diary in two
 The work diary can also be used as a collaborative tool for multiple forgetful people working on the same project. When used in this way, the diary is a project diary which serves as the documentation of the project.
 
 ## Beamer Themes
+![alt text](https://github.com/jkjaer/aauLatexTemplates/img/aauSimpleLarge "AAU Simple Beamer Theme")
+
 A lot of the people at AAU use the beamer class to make their presentations which they give at exams, lectures, conferences, and workshops. These people often use one of the many standard beamer themes for their presentations. There is nothing wrong with these themes, and they serve their purpose. However, they are not very unique and do not promote Aalborg University very well. In order to avoid this, I have created three Beamer themes:
+
 - The AAU Simple Beamer Theme
 - The AAU Sidebar Beamer Theme
 - The Aalborg Beamer Theme
+
 If you like these, but are not affiliated with Aalborg University, you are very welcome to modify them. The easiest theme to modify is the Aalborg theme.
 
 ## The AAU Report Template
