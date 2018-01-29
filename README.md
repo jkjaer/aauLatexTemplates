@@ -39,4 +39,4 @@ This template can be used for writing such a thesis. The template takes care of 
 
 In order to avoid this, I have therefore created an AAU poster theme. The theme, which I have named aauposter, is simple, clean and unique. It is a particular configuration of the baposter class, and you have to download the baposter.cls file to use the AAU poster theme.
 
-
+See [an example/the documentation](aauPoster/aauposter.pdf).
