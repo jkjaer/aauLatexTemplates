@@ -12,7 +12,7 @@ The work diary can also be used as a collaborative tool for multiple forgetful p
 
 ## Beamer Themes
 ![AAU Simple Beamer Theme](https://github.com/jkjaer/aauLatexTemplates/blob/master/img/aauSimpleLarge.png "AAU Simple Beamer Theme")
-
+<img src="img/aauSimpleLarge.png" width="200">
 A lot of the people at AAU use the beamer class to make their presentations which they give at exams, lectures, conferences, and workshops. These people often use one of the many standard beamer themes for their presentations. There is nothing wrong with these themes, and they serve their purpose. However, they are not very unique and do not promote Aalborg University very well. In order to avoid this, I have created three Beamer themes:
 
 - The AAU Simple Beamer Theme
