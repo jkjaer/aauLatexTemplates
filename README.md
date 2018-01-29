@@ -11,8 +11,7 @@ Sure sure, that all sounds great and all, but how do you manage the diary in two
 The work diary can also be used as a collaborative tool for multiple forgetful people working on the same project. When used in this way, the diary is a project diary which serves as the documentation of the project.
 
 ## Beamer Themes
-![AAU Simple Beamer Theme](https://github.com/jkjaer/aauLatexTemplates/blob/master/img/aauSimpleLarge.png "AAU Simple Beamer Theme")
-<img src="img/aauSimpleLarge.png" width="200">
+<img src="img/aauSimpleLarge.png" width="400" alt="AAU Simple Theme"><img src="img/aauSidebarLarge.png" width="400" alt="AAU Sidebar Theme"><img src="img/aalborgLarge.png" width="400" alt="Aalborg Theme"><br />
 A lot of the people at AAU use the beamer class to make their presentations which they give at exams, lectures, conferences, and workshops. These people often use one of the many standard beamer themes for their presentations. There is nothing wrong with these themes, and they serve their purpose. However, they are not very unique and do not promote Aalborg University very well. In order to avoid this, I have created three Beamer themes:
 
 - The AAU Simple Beamer Theme
