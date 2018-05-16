@@ -1,9 +1,24 @@
 #!/bin/bash
 
-#variables
-install_folder=~/texmf
-
 echo "[Starting installation]"
+
+#detect OS
+os_type=$(uname -s)
+
+echo "Detecting OS..."
+
+#place folders based on OS
+if [ "$os_type" == "Darwin" ]; then
+    install_folder=~/Library/texmf
+    echo "Detected Mac OS X"
+elif [ "$os_type" == "Linux" ]; then
+    install_folder=~/texmf
+    echo "Detected Linux"
+else
+    echo "Could not detect OS type... Exciting"
+    exit
+fi
+
 
 #make folders - sty
 mkdir -p $install_folder/tex/latex/beamer/themes/{color,inner,outer,theme}
