@@ -1,39 +1,48 @@
 \pdfbookmark[0]{Front page}{label:frontpage}%
 \begin{titlepage}
+\vspace*{\fill}
+    \backgroundsetup{
+    scale=1.1,
+    angle=0,
+    opacity=1.0,  %% adjust
+    contents={\includegraphics[width=\paperwidth,height=\paperheight]{figures/aau_waves}}
+    }
   \addtolength{\hoffset}{0.5\evensidemargin-0.5\oddsidemargin} %set equal margins on the frontpage - remove this line if you want default margins
   \noindent%
-  \begin{tabular}{@{}p{\textwidth}@{}}
-    \toprule[2pt]
-    \midrule
-    \vspace{0.2cm}
+  {\color{white}\fboxsep0pt\colorbox{aaublue}{\begin{tabular}{@{}p{\textwidth}@{}}
     \begin{center}
     \Huge{\textbf{
-      Report Title% insert your title here
+      A study on the Universe% insert your title here
     }}
     \end{center}
     \begin{center}
       \Large{
-        - Subtitle -% insert your subtitle here
+        Development of a predictive model% insert your subtitle here
       }
     \end{center}
-    \vspace{0.2cm}\\
-    \midrule
-    \toprule[2pt]
-  \end{tabular}
-  \vspace{4 cm}
-  \begin{center}
-    {\large
-      Project Report%Insert document type (e.g., Project Report)
+    \vspace{0.2cm}
+   \begin{center}
+    {\Large
+      Anders Andersen, Alfred Alfredsen, Anne Annesen% insert names separated by comma
     }\\
     \vspace{0.2cm}
-    {\Large
-      Group Name/Number%Insert your group name or real names here
+    {\large
+      Energy Technology, TEPE4-1005, 2018-06% insert name of study, group number, year-month
     }
-  \end{center}
+   \end{center}
+   \vspace{0.2cm}
+%% Comment this section in if you are doing Bachelor or Master Project   
+   \begin{center}
+    {\Large
+      Master's Project
+      %Bachelor Project
+    }
+   \end{center}
+  \end{tabular}}}
   \vfill
   \begin{center}
-  Aalborg University\\
-  Electronics and IT
+    \includegraphics[width=0.2\paperwidth]{figures/aau_logo_circle_en}% comment this line in for English version
+    %\includegraphics[width=0.2\paperwidth]{figures/aau_logo_circle_da} %comment this line in for Danish version
   \end{center}
 \end{titlepage}
 \clearpage
