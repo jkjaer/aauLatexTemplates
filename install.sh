@@ -37,5 +37,7 @@ done
 
 #copy graphics 
 cp -R aauBeamer/aalborg/AAUgraphics/ $install_folder/tex/generic/images/
+cp aauPoster/aau_logo_* $install_folder/tex/generic/images/
+cp -R aauReportTemplate/figures/ $install_folder/tex/generic/images/
 
 echo "[Installation done]"
