@@ -35,9 +35,17 @@ for beamer_temp in Aalborg AAUsidebar AAUsimple; do
     cp aauBeamer/$beamer_temp_lower/beamertheme$beamer_temp.sty $install_folder/tex/latex/beamer/themes/theme/
 done
 
-#copy graphics 
-cp -R aauBeamer/aalborg/AAUgraphics/ $install_folder/tex/generic/images/
-cp -R aauPoster/AAUgraphics/ $install_folder/tex/generic/images/
-cp -R aauReportTemplate/AAUgraphics/ $install_folder/tex/generic/images/
+#copy graphics if on Linux and print Installation Done
+if [ "$os_type" == "Linux" ]; then
+    cp -R aauBeamer/aalborg/AAUgraphics/ $install_folder/tex/generic/images/
+    cp -R aauPoster/AAUgraphics/ $install_folder/tex/generic/images/
+    cp -R aauReportTemplate/AAUgraphics/ $install_folder/tex/generic/images/
+    echo "sty and graphics files are no longer required to be in the same directory as your LaTeX files, but are installed globally."
+else
+    echo "sty files are no longer required to be in the same directory as your project, but are installed globally."
+    echo "NOTE: Unlike Linux graphics files are STILL required to be in the same directory as your project"
+fi
 
 echo "[Installation done]"
+
+
