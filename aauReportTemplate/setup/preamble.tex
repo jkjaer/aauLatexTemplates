@@ -111,10 +111,15 @@
 % Bibliography
 % http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[backend=bibtex,
-  bibencoding=utf8
-  ]{biblatex}
-\addbibresource{bib/mybib}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\addto{\captionsdanish}{%
+  \renewcommand{\bibname}{References}
+}
+% Use the following to change name of the bibliography to Litteraturliste
+%\addto{\captionsenglish}{%
+%  \renewcommand{\bibname}{Litteraturliste}
+%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Misc
