@@ -30,7 +30,7 @@ mkdir -p $install_folder/tex/generic/images
 for beamer_temp in Aalborg AAUsidebar AAUsimple; do
     beamer_temp_lower=$(echo "$beamer_temp" | awk '{print tolower($0)}')
     cp aauBeamer/$beamer_temp_lower/beamercolortheme$beamer_temp.sty $install_folder/tex/latex/beamer/themes/color/
-    cp aauBeamer/$beamer_temp_lower/beamerinnertheme$beamer_temp.sty $install_folder/tex/latex/beamer/themes/theme/
+    cp aauBeamer/$beamer_temp_lower/beamerinnertheme$beamer_temp.sty $install_folder/tex/latex/beamer/themes/inner/
     cp aauBeamer/$beamer_temp_lower/beameroutertheme$beamer_temp.sty $install_folder/tex/latex/beamer/themes/outer/
     cp aauBeamer/$beamer_temp_lower/beamertheme$beamer_temp.sty $install_folder/tex/latex/beamer/themes/theme/
 done
