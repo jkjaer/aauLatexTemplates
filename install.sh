@@ -41,3 +41,5 @@ cp -R aauPoster/AAUgraphics $install_folder/tex/generic/
 cp -R aauReportTemplate/AAUgraphics $install_folder/tex/generic/
 
 echo "[Installation done]"
+
+

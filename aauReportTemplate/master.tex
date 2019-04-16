@@ -21,7 +21,8 @@
 \input{sections/introduction.tex}
 \input{sections/ch2name.tex}
 \input{sections/conclusion.tex}
-\printbibliography[heading=bibintoc]
+% If you do not write the report in English, translating the bibliography title to, e.g., Danish, should not be done here. Instead, you should change the main language in the preamble (look for the line \usepackage[danish,english]{babel} and change the order/delete the 'english' option). See more in the babel package documentation.
+\printbibliography[heading=bibintoc, title=Bibliography]
 \label{bib:mybiblio}
 \appendix
 \input{sections/appAname.tex}
