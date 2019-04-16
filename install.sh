@@ -36,8 +36,8 @@ for beamer_temp in Aalborg AAUsidebar AAUsimple; do
 done
 
 #copy graphics 
-cp -R aauBeamer/aalborg/AAUgraphics/ $install_folder/tex/generic/images/
-cp -R aauPoster/AAUgraphics/ $install_folder/tex/generic/images/
-cp -R aauReportTemplate/AAUgraphics/ $install_folder/tex/generic/images/
+cp -R aauBeamer/aalborg/AAUgraphics $install_folder/tex/generic/
+cp -R aauPoster/AAUgraphics $install_folder/tex/generic/
+cp -R aauReportTemplate/AAUgraphics $install_folder/tex/generic/
 
 echo "[Installation done]"
