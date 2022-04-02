@@ -1,4 +1,4 @@
-\documentclass[a0paper,portrait]{baposter}
+\documentclass[a0paper,portrait]{xebaposter}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Language, Encoding and Fonts
 % http://en.wikibooks.org/wiki/LaTeX/Internationalization
@@ -33,7 +33,7 @@
 % http://en.wikibooks.org/wiki/LaTeX/Tables
 % http://pgfplots.sourceforge.net/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% You cannot use floats in the baposter theme.
+% You cannot use floats in the xebaposter theme.
 % We therefore load the caption package which provides
 % the command \captionof
 % Set up how figure and table captions are displayed
@@ -115,7 +115,7 @@
 }
 % create links
 \usepackage{url}
-%note that the hyperref package is currently incompatible with the baposter class
+%note that the hyperref package is currently incompatible with the xebaposter class
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macros
@@ -200,14 +200,14 @@
   \item Posters are often used at conferences for presenting exciting new research results.
   \item So far no official AAU poster theme is available to the researchers and students at Aalborg University (AAU).
   \item The present theme changes this.
-  \item The theme is a particular configuration of the \alert{baposter} poster template \cite{baposter} which you can find here \url{http://www.brian-amberg.de/uni/poster/} and must have installed in order to use the AAU poster theme.
+  \item The theme is a particular configuration of the \alert{xebaposter} poster template \cite{xebaposter} which you can find here \url{https://ctan.org/tex-archive/graphics/pgf/contrib/xebaposter} and must have installed in order to use the AAU poster theme. xebaposter is a fork of the baposter class~\cite{baposter}.
 \end{itemize}
 \end{posterbox}
 
 \begin{posterbox}[name=usage,column=0,below=intro]{Usage}
 \begin{itemize}
   \item To use the AAU poster theme, place the {\tt aauposter.tex} file in your preferred folder and modify the file to your needs.
-  \item You can read more about how you can modify the theme in the documentation for the baposter template which you can find here \url{http://www.brian-amberg.de/uni/poster/}.
+  \item You can read more about how you can modify the theme in the documentation for the xebaposter template which you can find here \url{https://ctan.org/tex-archive/graphics/pgf/contrib/xebaposter}.
 \end{itemize}
 \end{posterbox}
 
@@ -273,17 +273,17 @@ Here is an example of an equation
 \end{posterbox}
 
 \begin{posterbox}[name=install,span=2,column=1,row=0]{Installation}
-You can either make a local or a global installation of the baposter poster template \cite{baposter}.
+You can either make a local or a global installation of the xebaposter poster template \cite{xebaposter}.
 \begin{description}
-  \item[Local:] Place the {\tt baposter.cls} file in the same folder as the poster file {\tt aauposter.tex}
-  \item[Global:] Place the {\tt baposter.cls} file in your local latex-directory tree. This is by default {\tt <somewhere>/textmf/tex/latex/baposter} where {\tt <somewhere>} is
+  \item[Local:] Place the {\tt xebaposter.cls} file in the same folder as the poster file {\tt aauposter.tex}
+  \item[Global:] Place the {\tt xebaposter.cls} file in your local latex-directory tree. This is by default {\tt <somewhere>/textmf/tex/latex/xebaposter} where {\tt <somewhere>} is
   \begin{description}
     \item[GNU/Linux:] {\tt/home/<username>}
     \item[Windows XP:] {\tt c:\textbackslash Document and Settings\textbackslash<username>}
     \item[Windows Vista+:] {\tt c:\textbackslash Users\textbackslash<username>}
     \item[Mac OSX] {\tt/home/<username>/Library}
   \end{description}
-  On GNU/Linux and Windows, you have to update the filename database after placing {\tt baposter.cls} in the correct folder. This is done by
+  On GNU/Linux and Windows, you have to update the filename database after placing {\tt xebaposter.cls} in the correct folder. This is done by
   \begin{description}
     \item[GNU/Linux:] {\tt \$ texhash \textasciitilde /texmf}
     \item[Windows with MiKTeX] Open the MiKTeX Settings dialog and click 'Refresh FNDB'.
@@ -293,7 +293,7 @@ You can either make a local or a global installation of the baposter poster temp
 \end{posterbox}
 
 \begin{posterbox}[name=figures,column=1,below=install,above=bottom]{Figures and Tables}
-You cannot use floats in the baposter template. However, you can use figure captions by using {\tt \textbackslash captionof} instead of {\tt \textbackslash caption}. This is demonstrated in Fig.~\ref{fig:figlabel}. Moreover, you can also use {\tt \textbackslash label} and {\tt \textbackslash ref} to make references to your figures and/or tables.
+You cannot use floats in the xebaposter template. However, you can use figure captions by using {\tt \textbackslash captionof} instead of {\tt \textbackslash caption}. This is demonstrated in Fig.~\ref{fig:figlabel}. Moreover, you can also use {\tt \textbackslash label} and {\tt \textbackslash ref} to make references to your figures and/or tables.
 \begin{center}
   \includegraphics{AAUgraphics/aau_logo_new}
   \captionof{figure}{Here is a figure caption}
@@ -329,9 +329,9 @@ You can also use {\tt pgfplots} \cite{pgfplots} for plotting your Matlab data. T
 
 \begin{posterbox}[name=feedback,column=2,below=problems]{Feedback}
   \begin{itemize}
-    \item The AAU poster theme has been tested with baposter v. 2.0, and it can be downloaded from my Github-site \cite{jkngithub}.
-    \item If you find a bug in the AAU theme (and not in the baposter template), please do not hesitate to contact me. There is a FAQ at the baposter website \cite{baposter}, if you should have any problems with it.
-  \end{itemize}
+    \item The AAU poster theme has been tested with xebaposter v. 2.51, and it can be downloaded from my Github-site \cite{jkngithub}.
+    \item If you find a bug in the AAU theme (and not in the xebaposter template), please do not hesitate to contact me. There is a FAQ at the baposter website \cite{baposter}, if you should have any problems with it. Please report bugs for xebaposter at~\cite{xebaposter}.
+\end{itemize}
 \end{posterbox}
 
 \begin{posterbox}[name=refs,column=2,below=feedback,above=bottom]{References}
@@ -344,6 +344,7 @@ You can also use {\tt pgfplots} \cite{pgfplots} for plotting your Matlab data. T
 \begin{thebibliography}{1}% Simple bibliography with widest label of 1
 \itemsep=-0.01em% Save space between the separation
 \setlength{\baselineskip}{0.4em}% Save space with longer lines
+\bibitem{xebaposter} Seiied-Mohammad-Javad Razvian: \emph{xebaposter -- Create beautiful scientific Persian/Latin posters using TikZ}, \url{https://github.com/javadr/xebaposter}
 \bibitem{baposter} Brian Amberg: \emph{LaTeX Poster Template}, \url{http://www.brian-amberg.de/uni/poster/} 
 \bibitem{pgfplots} Christian Feuersänger: \emph{PGFPlots - A LaTeX Package to create normal/logarithmic plots in two and three dimensions}, \url{http://pgfplots.sourceforge.net/} 
 \bibitem{jkngithub} Jesper Kjær Nielsen: \emph{Official AAU Beamer Theme, Poster Theme, and Report Template}, \url{http://github.com/jkjaer/aauLatexTemplates}
