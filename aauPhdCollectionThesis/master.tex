@@ -1,5 +1,5 @@
 \input{setup/preamble.tex}% package inclusion and set up of the document
-\input{setup/hyphenations.tex}% 
+\input{setup/hyphenations.tex}%
 \input{setup/macros.tex}% my new macros
 
 \begin{document}
@@ -38,10 +38,8 @@ display%
 }{%style
   1cm
 }{%code before title
-  \thispagestyle{empty}\begin{center}\Large
-}[%code after title
-  \end{center}
-]
+  \thispagestyle{empty}\begin{center}\Large\end{center}
+}%code after title
 \includepaper{papers/paperA/paperA}
 \includepaper{papers/paperB/paperB}
 \end{document}
