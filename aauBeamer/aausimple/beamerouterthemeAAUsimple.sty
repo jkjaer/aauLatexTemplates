@@ -6,7 +6,6 @@
 \RequirePackage{tikz}
 \usetikzlibrary{external}
 \RequirePackage{calc}
-\RequirePackage{fp}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Theme options and definitions
@@ -44,7 +43,31 @@
 % radius of the counters
 \newlength{\beamer@counterradius}
 \setlength{\beamer@counterradius}{\beamer@logoinnerradius/2+\beamer@logoouterradius/2}
-% the progress
+% Calculate progress angle.
+% \inserttotalframenumber may be stale on the first compilation
+% after the number of frames has changed, so never allow the
+% progress ratio to exceed 1.
+\newcommand{\aau@calculateprogress}{%
+  \ifnum\inserttotalframenumber<1\relax
+    % Total number of frames is not yet available
+    \def\progress{0}
+  \else
+    \ifnum\insertframenumber>\inserttotalframenumber\relax
+      % Stored total is stale: cap progress at one complete circle
+      \def\progress{360}
+    \else
+      % Normal case
+      \pgfmathsetmacro{\progress}{
+        360*(\insertframenumber/\inserttotalframenumber)
+      }
+    \fi
+  \fi
+  % Reverse direction if requested
+  \ifx\beamer@rotationcw\undefined
+  \else
+    \pgfmathsetmacro{\progress}{-\progress}
+  \fi
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %beamer specific options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,16 +137,7 @@
       %% draw progress circle/bar
       \ifx\beamer@progressstyle\beamer@progressfixedCircCnt% the circular counter with a fixed counter
         % calculate end position
-%        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
-%          \pgfmathsetmacro{\progress}{360*\insertframenumber/\inserttotalframenumber};
-%        \else% clockwise rotation
-%          \pgfmathsetmacro{\progress}{-360*\insertframenumber/\inserttotalframenumber};
-%        \fi
-        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
-          \FPeval\progress{360*\insertframenumber/\inserttotalframenumber}
-        \else% clockwise rotation
-          \FPeval\progress{(-360*\insertframenumber/\inserttotalframenumber)}
-        \fi
+		\aau@calculateprogress
         % draw the arc
         \draw[color=AAUsimple.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc[radius=\beamer@counterradius, start angle=0, end angle=\progress];
         \fill[fill=AAUsimple.bg] ([shift={(\progress:\beamer@counterradius)}] logopos) circle (0.25\beamer@borderwidth);
@@ -133,16 +147,7 @@
       
       \ifx\beamer@progressstyle\beamer@progressmovCircCnt% the circular counter with a moving counter
         % draw the current and total frame number
-%        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
-%          \pgfmathsetmacro{\progress}{360*\insertframenumber/\inserttotalframenumber};
-%        \else% clockwise rotation
-%          \pgfmathsetmacro{\progress}{-360*\insertframenumber/\inserttotalframenumber};
-%        \fi
-        \ifx\beamer@rotationcw\undefined% counterclockwise rotation
-          \FPeval\progress{360*\insertframenumber/\inserttotalframenumber}
-        \else% clockwise rotation
-          \FPeval\progress{(-360*\insertframenumber/\inserttotalframenumber)}
-        \fi
+		\aau@calculateprogress
         % draw the arc
         \draw[color=AAUsimple.bg,line width=0.5*\beamer@borderwidth] ([xshift=\beamer@counterradius] logopos) arc (0:\progress:\beamer@counterradius);
         % place the total number of frames
