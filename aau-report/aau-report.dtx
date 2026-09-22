@@ -1,0 +1,629 @@
+% \iffalse meta-comment
+%
+% BSD 3-Clause License
+%
+% Copyright (c) 2025 AAU
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions are met:
+%
+% * Redistributions of source code must retain the above copyright notice, this
+%   list of conditions and the following disclaimer.
+%
+% * Redistributions in binary form must reproduce the above copyright notice,
+%   this list of conditions and the following disclaimer in the documentation
+%   and/or other materials provided with the distribution.
+%
+% * Neither the name of the copyright holder nor the names of its
+%   contributors may be used to endorse or promote products derived from
+%   this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+% AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+% IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+% DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+% FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+% DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+% SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+% OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+% OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{aau-report.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[2025-09-28]
+%<class>\ProvidesExplClass{aau-report}{2025-09-28}{1.0.0}{AAU Report Class}
+%<*driver>
+\documentclass{l3doc}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{aau-report.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \changes{v1.0.0}{2025-09-28}{Initial version}
+%
+% \title{The \textsf{aau-report} class}
+% \author{Martin Kedmenec}
+%
+% \maketitle
+% \tableofcontents
+%
+% \section{Introduction}
+% A short user-facing manual goes here...
+%
+% \DescribeMacro{\aaureportsetup}
+%
+% This is the most important macro.
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%    \begin{macrocode}
+% Base Class
+\LoadClass[11pt, openright]{report}
+
+% Base Packages
+\RequirePackage{l3keys2e, xparse}
+
+\sys_if_engine_luatex:F { \ClassError{aau-report}{This class requires LuaLaTeX}{Use lualatex} }
+
+% Packages
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[backend=biber, style=ieee]{biblatex}
+\RequirePackage{fontspec, microtype, geometry, csquotes, graphicx, lastpage, fancyhdr, tikz, hyperref}
+
+% Colors
+\definecolor{aaublue}{RGB}{33, 26, 82}
+
+% Font
+\defaultfontfeatures{Ligatures=TeX, Scale=MatchLowercase}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Fira Mono}
+
+% Geometry
+\geometry{
+    % showframe,
+    a4paper,
+    left=1in,
+    right=1in,
+    twoside
+}
+
+% Tikz
+\ExplSyntaxOff
+\usetikzlibrary{calc}
+\ExplSyntaxOn
+
+% Hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=RoyalBlue,
+    urlcolor=aaublue,
+    pdfborder={0 0 0}
+}
+
+% Variables
+\tl_new:N \l_aau_lang_tl
+\tl_new:N \l_aau_background_file_tl
+\tl_new:N \l_aau_hero_file_tl
+\tl_new:N \l_aau_logo_file_tl
+\tl_new:N \l_aau_logo_wordmark_file_tl
+\tl_new:N \l_aau_title_tl
+\tl_new:N \l_aau_subtitle_tl
+\tl_new:N \l_aau_programline_tl
+\tl_new:N \l_aau_projecttype_tl
+\tl_new:N \l_aau_department_tl
+\tl_new:N \l_aau_theme_tl
+\tl_new:N \l_aau_projectperiod_tl
+\tl_new:N \l_aau_projectgroup_tl
+\tl_new:N \l_aau_copies_tl
+\tl_new:N \l_aau_datecomplete_tl
+\tl_new:N \l_aau_abstract_tl
+\tl_new:N \l_aau_lang_code_tl
+\tl_new:N \l_aau_colophon_tl
+\tl_new:N \l_aau_date_tl
+\tl_new:N \l_aau_preface_tl
+\tl_new:N \l_aau_pdf_title_tl
+\tl_new:N \l_aau_pdf_author_tl
+\tl_new:N \l_aau_pdf_subject_tl
+\tl_new:N \l_aau_coverstyle_tl
+
+\seq_new:N \l_aau_authors_seq
+\seq_new:N \l_aau_participants_seq
+\seq_new:N \l_aau_supervisors_seq
+
+\prop_new:N \l_aau_intl_en_prop
+\prop_new:N \l_aau_intl_da_prop
+
+\bool_new:N \l_aau_roman_front_bool
+
+% Defaults
+\tl_set:Nn \l_aau_lang_tl {english}
+\tl_set:Nn \l_aau_background_file_tl {aau_waves}
+\tl_set:Nn \l_aau_hero_file_tl {stars}
+\tl_set:Nn \l_aau_logo_file_tl {aau_logo_circle_en}
+\tl_set:Nn \l_aau_logo_wordmark_file_tl {aau_logo_en}
+\tl_set:Nn \l_aau_title_tl {}
+\tl_set:Nn \l_aau_subtitle_tl {}
+\tl_set:Nn \l_aau_programline_tl {}
+\tl_set:Nn \l_aau_projecttype_tl {}
+\tl_set:Nn \l_aau_department_tl {}
+\tl_set:Nn \l_aau_theme_tl {}
+\tl_set:Nn \l_aau_projectperiod_tl {}
+\tl_set:Nn \l_aau_projectgroup_tl {}
+\tl_set:Nn \l_aau_copies_tl {}
+\tl_set:Nn \l_aau_datecomplete_tl {}
+\tl_set:Nn \l_aau_abstract_tl {}
+\tl_set:Nn \l_aau_lang_code_tl {}
+\tl_set:Nn \l_aau_colophon_tl {}
+\tl_set:Nn \l_aau_date_tl {}
+\tl_set:Nn \l_aau_preface_tl {}
+\tl_set:Nn \l_aau_pdf_title_tl {}
+\tl_set:Nn \l_aau_pdf_author_tl {}
+\tl_set:Nn \l_aau_pdf_subject_tl {}
+\tl_set:Nn \l_aau_coverstyle_tl {}
+
+\seq_clear:N \l_aau_authors_seq
+\seq_clear:N \l_aau_participants_seq
+\seq_clear:N \l_aau_supervisors_seq
+
+\prop_put:Nnn \l_aau_intl_en_prop {cover} {Cover}
+\prop_put:Nnn \l_aau_intl_en_prop {colophon} {Colophon}
+\prop_put:Nnn \l_aau_intl_en_prop {project-info} {Project~Information}
+\prop_put:Nnn \l_aau_intl_en_prop {label-title} {Title:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-theme} {Theme:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-period} {Project~Period:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-group} {Project~Group:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-participants} {Participant(s):}
+\prop_put:Nnn \l_aau_intl_en_prop {label-supervisors} {Supervisor(s):}
+\prop_put:Nnn \l_aau_intl_en_prop {label-copies} {Copies:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-pages} {Page~Numbers:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-date} {Date~of~Completion:}
+\prop_put:Nnn \l_aau_intl_en_prop {label-abstract} {Abstract:}
+\prop_put:Nnn \l_aau_intl_en_prop {footer-note} {The~content~of~this~report~is~freely~available,~but~publication~(with~reference)~may~only~be~pursued~due~to~agreement~with~the~author.}
+\prop_put:Nnn \l_aau_intl_en_prop {university-name} {Aalborg~University}
+\prop_put:Nnn \l_aau_intl_en_prop {preface} {Preface}
+
+\prop_put:Nnn \l_aau_intl_da_prop {cover} {Forside}
+\prop_put:Nnn \l_aau_intl_da_prop {colophon} {Kolofon}
+\prop_put:Nnn \l_aau_intl_da_prop {project-info} {Projektoplysninger}
+\prop_put:Nnn \l_aau_intl_da_prop {label-title} {Titel:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-theme} {Tema:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-period} {Projektperiode:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-group} {Projektgruppe:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-participants} {Deltager(e):}
+\prop_put:Nnn \l_aau_intl_da_prop {label-supervisors} {Vejleder(e):}
+\prop_put:Nnn \l_aau_intl_da_prop {label-copies} {Oplagstal:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-pages} {Sidetal:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-date} {Afleveringsdato:}
+\prop_put:Nnn \l_aau_intl_da_prop {label-abstract} {Resumé:}
+\prop_put:Nnn \l_aau_intl_da_prop {footer-note} {Rapportens~indhold~er~frit~tilgængeligt,~men~offentliggørelse~(med~kildeangivelse)~må~kun~ske~efter~aftale~med~forfatterne.}
+\prop_put:Nnn \l_aau_intl_da_prop {university-name} {Aalborg~Universitet}
+\prop_put:Nnn \l_aau_intl_da_prop {preface} {Forord}
+
+\bool_set_true:N \l_aau_roman_front_bool
+
+% Class Options
+\keys_define:nn { aau-report.clsopts }
+{
+    language .tl_set:N = \l_aau_lang_tl,
+    coverstyle .choice:,
+    coverstyle / graphic .code:n = { \tl_set:Nn \l_aau_coverstyle_tl {graphic} },
+    coverstyle / minimal .code:n = { \tl_set:Nn \l_aau_coverstyle_tl {minimal} },
+    coverstyle .initial:n = graphic
+}
+
+\DeclareOption{english}{ \keys_set:nn {aau-report.clsopts} { language = english } }
+\DeclareOption{danish}{ \keys_set:nn {aau-report.clsopts} { language = danish } }
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\ProcessOptions\relax
+\ProcessKeysOptions{ aau-report.clsopts }
+
+% Babel
+\RequirePackage[main=\tl_use:N \l_aau_lang_tl, english, danish]{babel}
+
+% Setup
+\keys_define:nn { aau-report.setup }
+{
+    title .tl_set:N = \l_aau_title_tl,
+    subtitle .tl_set:N = \l_aau_subtitle_tl,
+    theme .tl_set:N = \l_aau_theme_tl,
+    authors .code:n = { \seq_set_from_clist:Nn \l_aau_authors_seq {#1} },
+    supervisors .code:n = { \seq_set_from_clist:Nn \l_aau_supervisors_seq {#1} },
+    department .tl_set:N = \l_aau_department_tl,
+    programline .tl_set:N = \l_aau_programline_tl,
+    projecttype .tl_set:N = \l_aau_projecttype_tl,
+    copies .tl_set:N = \l_aau_copies_tl,
+    period .tl_set:N = \l_aau_projectperiod_tl,
+    group .tl_set:N = \l_aau_projectgroup_tl,
+    abstract .tl_set:N = \l_aau_abstract_tl,
+    preface .tl_set:N = \l_aau_preface_tl,
+    colophon .tl_set:N = \l_aau_colophon_tl,
+    date .tl_set:N = \l_aau_date_tl
+}
+
+\NewDocumentCommand{\aaureportsetup} { m }
+{ \keys_set:nn { aau-report.setup } {#1} }
+
+% Functions
+\cs_new:Npn \aau_lang_is_danish: { \tl_if_eq:VnTF \l_aau_lang_tl {danish} {1} {0} }
+\cs_new:Npn \aau_lang_code: { \tl_if_eq:VnTF \l_aau_lang_tl {danish} {da} {en} }
+
+\cs_new:Npn \aau_intl:n #1
+{
+    \str_if_eq:VnTF \l_aau_lang_tl {english}
+    { \prop_item:Nn \l_aau_intl_en_prop {#1} }
+    { \prop_item:Nn \l_aau_intl_da_prop {#1} }
+}
+
+\cs_set_protected:Npn \aau_update_logo_from_lang:
+{
+    \str_if_eq:VnTF \l_aau_lang_tl {english}
+    { \tl_set:Nn \l_aau_logo_file_tl {aau_logo_circle_en} }
+    { \tl_set:Nn \l_aau_logo_file_tl {aau_logo_circle_da} }
+}
+
+\AddToHook{begindocument}{\aau_update_logo_from_lang:}
+
+\cs_set_protected:Npn \aau_update_logo_wordmark_from_lang:
+{
+    \str_if_eq:VnTF \l_aau_lang_tl {english}
+    { \tl_set:Nn \l_aau_logo_wordmark_file_tl {aau_logo_en} }
+    { \tl_set:Nn \l_aau_logo_wordmark_file_tl {aau_logo_da} }
+}
+
+\AddToHook{begindocument}{\aau_update_logo_wordmark_from_lang:}
+
+\regex_new:N \l__aau_all_except_name_regex
+\regex_set:Nn \l__aau_all_except_name_regex { \s*<[^<>]+>\s*\Z }
+
+\cs_new_protected:Npn \aau_author_name:n #1
+{
+    \tl_set:Nn \l_tmpa_tl {#1}
+
+    \regex_replace_once:NnN \l__aau_all_except_name_regex { } \l_tmpa_tl
+
+    \tl_trim_spaces:N \l_tmpa_tl
+
+    \tl_use:N \l_tmpa_tl
+}
+
+\cs_new_protected:Npn \aau_typeset_authors_names:n #1
+{
+    \seq_if_empty:NF \l_aau_authors_seq
+    {
+        \int_zero:N \l_tmpa_int
+        \int_set:Nn \l_tmpb_int { \seq_count:N \l_aau_authors_seq }
+
+        \seq_map_inline:Nn \l_aau_authors_seq
+        {
+            \int_incr:N \l_tmpa_int
+
+            \aau_author_name:n {##1}
+
+            \int_compare:nNnT { \l_tmpa_int } < { \l_tmpb_int } { #1 }
+        }
+    }
+}
+
+\cs_new_protected:Npn \aau_typeset_cover_text:
+{
+    {\Huge\bfseries \tl_use:N \l_aau_title_tl}\par
+    \vspace{0.75\baselineskip}
+    {\Large \tl_use:N \l_aau_subtitle_tl}\par
+    \vspace{0.75\baselineskip}
+    {\Large \aau_typeset_authors_names:n {,~}}\par
+    \vspace{0.75\baselineskip}
+    {\large \tl_use:N \l_aau_programline_tl}\par
+    \vspace{0.25\baselineskip}
+    {\Large \tl_use:N \l_aau_projecttype_tl}\par
+}
+
+% Cover Graphic
+\cs_new_protected:Npn \aau_typeset_cover_graphic:
+{
+    \tl_set:Nn \l_tmpa_tl { \aau_intl:n {cover} }
+
+    \pdfbookmark[0]{\tl_use:N \l_tmpa_tl}{label:cover}
+
+    \begin{titlepage}
+        \begin{tikzpicture}[remember~picture, overlay]
+            \node[anchor=south, inner~sep=0pt] at (current~page.south)
+            {\includegraphics[width=\paperwidth, height=\paperheight]{\tl_use:N \l_aau_background_file_tl}};
+
+            \node[anchor=north, inner~sep=0pt] at (current~page.north)
+            {\includegraphics[width=\paperwidth, totalheight=0.5\paperwidth]{\tl_use:N \l_aau_hero_file_tl}};
+
+            \node[
+                anchor=north,
+                inner~sep=0pt,
+                inner~ysep=30pt,
+                align=center,
+                text~width=\paperwidth,
+                fill=white,
+                draw=none
+            ] at ($(current~page.north)+(0,-0.35\paperheight)$)
+            {%
+                \color{aaublue}
+                \parbox{\dimexpr .80\paperwidth\relax}{%
+                    \centering
+                    \aau_typeset_cover_text:
+                }%
+            };
+
+            \node[anchor=south, yshift=1.2cm] at (current~page.south) {%
+                \includegraphics[width=0.20\paperwidth]{\tl_use:N \l_aau_logo_file_tl}%
+            };
+        \end{tikzpicture}
+    \end{titlepage}
+}
+
+% Cover Minimal
+\cs_new_protected:Npn \aau_typeset_cover_minimal:
+{
+    \tl_set:Nn \l_tmpa_tl { \aau_intl:n {cover} }
+
+    \pdfbookmark[0]{\tl_use:N \l_tmpa_tl}{label:cover}
+
+    \begin{titlepage}
+        \begin{tikzpicture}[remember~picture, overlay]
+            \node at (current~page.center) {
+                \includegraphics[width=\paperwidth, height=\paperheight]{\tl_use:N \l_aau_background_file_tl}
+            };
+
+            \node[
+                inner~sep=0pt,
+                inner~ysep=30pt,
+                fill=aaublue
+            ] at (current~page.center)
+            {%
+                \color{white}
+                \parbox{\textwidth}{%
+                    \centering
+                    \aau_typeset_cover_text:
+                }%
+            };
+
+            \node[anchor=south, yshift=5cm] at (current~page.south) {
+                \includegraphics[width=0.20\paperwidth]{ \tl_use:N \l_aau_logo_file_tl }
+            };
+        \end{tikzpicture}
+    \end{titlepage}
+}
+
+% Colophon
+\cs_new_protected:Npn \aau_typeset_colophon:
+{
+    \tl_set:Nn \l_aau_colophon_intl_tl { \aau_intl:n {colophon} }
+    \pdfbookmark[0]{\l_aau_colophon_intl_tl}{label:colophon}
+
+    {
+        \small
+        \strut\vfill
+        \noindent Copyright~\copyright{}~\aau_intl:n {university-name}~\the\year\par
+        \vspace{0.2cm}
+        \noindent
+
+        \tl_use:N \l_aau_colophon_tl
+    }
+
+    \clearpage
+}
+
+% Project Information
+\dim_new:N \l_aau_tp_left_dim
+\dim_new:N \l_aau_tp_right_dim
+
+\cs_new_protected:Npn \aau_tp_set_columns:
+{
+    \dim_set:Nn \l_aau_tp_left_dim { .5\textwidth - \tabcolsep }
+    \dim_set:Nn \l_aau_tp_right_dim { \textwidth - 2\tabcolsep - \l_aau_tp_left_dim }
+}
+
+\cs_new_protected:Npn \aau_tp_field:nn #1#2
+{
+    \textbf{#1}\\#2\par\bigskip
+}
+
+\cs_new:Npn \aau_tp_seq_lines:N #1 { \seq_use:Nn #1 {\\} }
+
+\cs_new_protected:Npn \aau_typeset_project_info:
+{
+    \tl_set:Nn \l_tmpa_tl { \aau_intl:n {project-info} }
+
+    \pdfbookmark[0]{\tl_use:N \l_tmpa_tl}{label:project-info}
+
+    \aau_tp_set_columns:
+
+    \noindent
+
+    \begin{tabular}{@{}ll@{}}
+        \parbox{\l_aau_tp_left_dim}{
+            \includegraphics[width=\l_aau_tp_left_dim]{\tl_use:N \l_aau_logo_wordmark_file_tl}
+        }
+         &
+        \parbox{\l_aau_tp_right_dim}{%
+            \raggedleft\sf\small
+        {\bfseries \tl_use:N \l_aau_department_tl} \\ % Or use \textbf?
+        \aau_intl:n {university-name}              \\
+            \href{https://www.aau.dk/}{https://www.aau.dk/}
+        }
+        \bigskip                                   \\
+        \parbox[t]{\l_aau_tp_left_dim}{
+            \aau_tp_field:nn { \aau_intl:n {label-title} } { \tl_use:N \l_aau_title_tl }
+            \aau_tp_field:nn { \aau_intl:n {label-theme} } { \tl_use:N \l_aau_theme_tl }
+            \aau_tp_field:nn { \aau_intl:n {label-period} } { \tl_use:N \l_aau_projectperiod_tl }
+            \aau_tp_field:nn { \aau_intl:n {label-group} } { \tl_use:N \l_aau_projectgroup_tl }
+            \aau_tp_field:nn { \aau_intl:n {label-participants} }{ \aau_typeset_authors_names:n {\\} }
+            \aau_tp_field:nn { \aau_intl:n {label-supervisors} } { \aau_tp_seq_lines:N \l_aau_supervisors_seq }
+            \aau_tp_field:nn { \aau_intl:n {label-copies} } { \tl_use:N \l_aau_copies_tl }
+            \aau_tp_field:nn { \aau_intl:n {label-pages} } { \pageref{LastPage} }
+            \aau_tp_field:nn { \aau_intl:n {label-date} } { \tl_use:N \l_aau_date_tl }
+        }
+         &
+        \parbox[t]{\l_aau_tp_right_dim}{
+            \textbf{\aau_intl:n {label-abstract}}\par\smallskip
+            \fbox{\parbox{\dim_eval:n{ \l_aau_tp_right_dim - 2\fboxsep - 2\fboxrule }}{
+                    \tl_use:N \l_aau_abstract_tl
+                }}
+        }
+        \\
+    \end{tabular}
+
+    \vfill
+
+    \noindent
+    {\footnotesize\emph{\aau_intl:n {footer-note}}}
+
+    \cleardoublepage
+}
+
+% Preface
+\regex_new:N \l__aau_name_regex
+\regex_set:Nn \l__aau_name_regex { \A(.*?)\s*<[^<>]+>\Z }
+
+\regex_new:N \l__aau_mail_regex
+\regex_set:Nn \l__aau_mail_regex { \A.*?<([^<>]+)>\Z }
+
+\cs_new_protected:Npn \aau_author_minipage:n #1
+{
+    \tl_set:Nn \l_tmpa_tl {#1}
+
+    \tl_clear_new:N \l_aau_tmp_name_tl
+    \tl_clear_new:N \l_aau_tmp_mail_tl
+
+    \regex_extract_once:NnN \l__aau_name_regex { #1 } \l_tmpa_seq
+    \tl_set:Nn \l_aau_tmp_name_tl { \seq_item:Nn \l_tmpa_seq {2} }
+
+    \regex_extract_once:NnN \l__aau_mail_regex { #1 } \l_tmpb_seq
+    \tl_set:Nn \l_aau_tmp_mail_tl { \seq_item:Nn \l_tmpb_seq {2} }
+
+    \begin{minipage}[t]{.45\textwidth}
+        \centering
+        \rule{\linewidth}{0.5pt}\\
+        \tl_use:N \l_aau_tmp_name_tl\\
+        \tl_if_blank:nTF \l_aau_tmp_mail_tl
+        {}
+        {
+            {\footnotesize \texttt{\tl_use:N \l_aau_tmp_mail_tl}}
+        }
+    \end{minipage}
+}
+
+\skip_new:N \l_aau_author_last_gap_skip
+\skip_set:Nn \l_aau_author_last_gap_skip { 3.5\baselineskip }
+
+\cs_new_protected:Npn \aau_make_preface:
+{
+    \tl_set:Nn \l_aau_preface_intl_tl { \aau_intl:n {preface} }
+    \chapter*{\tl_use:N \l_aau_preface_intl_tl\markboth{\tl_use:N \l_aau_preface_intl_tl}{\tl_use:N \l_aau_preface_intl_tl}}\label{ch:preface}
+
+    \addcontentsline{toc}{chapter}{\tl_use:N \l_aau_preface_intl_tl}
+
+    \tl_use:N \l_aau_preface_tl\par
+
+    \vspace{\baselineskip}\hfill \aau_intl:n {university-name},~\today
+
+    \vfill
+
+    \noindent
+
+    \int_set:Nn \l_tmpa_int { \seq_count:N \l_aau_authors_seq }
+    \tl_clear_new:N \l_aau_pending_box_tl
+
+    \seq_map_indexed_inline:Nn \l_aau_authors_seq
+    {
+        \tl_set:Nn \l_tmpb_tl { \aau_author_minipage:n {##2} }
+
+        \int_if_odd:nTF {##1}
+        {
+            \tl_set_eq:NN \l_aau_pending_box_tl \l_tmpb_tl
+        }
+        {
+            \vskip \l_aau_author_last_gap_skip
+
+            \noindent
+
+            \tl_use:N \l_aau_pending_box_tl \hfill \tl_use:N \l_tmpb_tl\par
+
+            \tl_clear:N \l_aau_pending_box_tl
+        }
+    }
+
+    \tl_if_empty:NTF \l_aau_pending_box_tl
+    {}
+    {
+        \vskip \l_aau_author_last_gap_skip
+
+        \noindent
+
+        \makebox[\textwidth][c]{\tl_use:N \l_aau_pending_box_tl}
+    }
+
+    \cleardoublepage
+}
+
+% Fancyhdr
+\cs_new_protected:Npn \aau_configure_fancyhdr:
+{
+    \pagestyle{fancy}
+    \fancyhf{}
+
+    \renewcommand{\headrulewidth}{0pt}
+
+    \fancyhead[RE]{\small\nouppercase\leftmark}
+    \fancyhead[LO]{\small\nouppercase\rightmark}
+
+    \fancyfoot[C]{\thepage}
+}
+
+\cs_new_protected:Npn \aau_make_frontmatter:
+{
+    \group_begin:
+
+    \bool_if:NT \l_aau_roman_front_bool
+    {
+        \pagenumbering{roman}
+    }
+
+    \str_if_eq:VnTF \l_aau_coverstyle_tl {graphic}
+    {
+        \aau_typeset_cover_graphic:
+    }
+    {
+        \aau_typeset_cover_minimal:
+    }
+
+    \aau_typeset_colophon:
+    \aau_typeset_project_info:
+
+    \tableofcontents
+
+    \aau_make_preface:
+
+    \group_end:
+
+    \pagenumbering{arabic}
+
+    \aau_configure_fancyhdr:
+}
+
+\AddToHook{begindocument}{\aau_make_frontmatter:}
+
+\cs_new_protected:Npn \aau_make_bibliography:
+{
+    \printbibliography[heading=bibintoc]
+}
+
+\AddToHook{enddocument}{\aau_make_bibliography:}
+%    \end{macrocode}

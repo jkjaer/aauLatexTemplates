@@ -1,0 +1,45 @@
+\documentclass[danish, coverstyle=graphic]{aau-report}
+
+\usepackage{ipsum}
+
+\aaureportsetup{
+    title = {Lorem ipsum dolor sit amet},
+    subtitle = {Sonsectetur adipiscing elit},
+    theme = {Fusce mauris},
+    department = {Computer Science},
+    authors = {%
+    Jonas S. Bak <jsbak25@student.aau.dk>,%
+    John Doe <jodoe25@student.aau.dk>,%
+    Jasmin O. Schou <jschou25@student.aau.dk>,%
+    Storm R. Krogh <skrog25@student.aau.dk>,%
+    Jeppe T. Schultz <jschul25@student.aau.dk>%
+    },
+    supervisors = {Søren B. Svendsen, Aase P. Christensen},
+    period = {Fall Semester 2025},
+    date = \today,
+    group = {5},
+    copies = {1},
+    programline = {Software, DSNSWCB521, \the\year-\the\month},
+    projecttype = {P5 Project},
+    abstract = {\ipsum<Type=par>[3-4]},
+    preface = {\ipsum<Type=par>[9]},
+    colophon = {\ipsum<Type=sent>[6-9]}
+}
+
+\addbibresource{bib/mybib.bib}
+
+\begin{document}
+
+\chapter{Cras mattis, ligula a pellentesque fermentum}
+
+\section{Morbi blandit leo sit amet}
+
+\ipsum<Type=par>[0-60]~\cite{madsen-2010}\par
+
+\appendix
+
+\chapter{Pellentesque pulvinar dignissim vestibulum}
+
+\ipsum<Type=par>[1-2]
+
+\end{document}

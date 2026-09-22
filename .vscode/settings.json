@@ -1,0 +1,20 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk-cd",
+      "command": "latexmk",
+      "args": ["-cd", "%DOC%"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    { "name": "latexmk cd", "tools": ["latexmk-cd"] }
+  ],
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.formatting.latex": "latexindent",
+  "latex-workshop.formatting.latexindent.args": [
+    "-l",
+    "%WORKSPACE_FOLDER%/localSettings.yaml",
+    "-m",
+    "%TMPFILE%"
+  ]
+}

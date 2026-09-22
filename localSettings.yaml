@@ -1,0 +1,13 @@
+onlyOneBackUp: 1
+defaultIndent: "    "
+modifyLineBreaks:
+  preserveBlankLines: 0
+  condenseMultipleBlankLinesInto: 1
+  oneSentencePerLine:
+    manipulateSentences: 1
+    textWrapSentences: 1
+    sentencesEndWith:
+      betterFullStop: 1
+      exclamationMark: 0
+  textWrapOptions:
+    columns: 120
